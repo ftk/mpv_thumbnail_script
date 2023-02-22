@@ -120,6 +120,9 @@ function Thumbnailer:check_storyboard_async(callback)
                         -- hack: youtube always adds 1 black frame at the end...
                         if sb.extractor == "youtube" then
                             self.state.thumbnail_count = self.state.thumbnail_count - 1
+                            -- hack: youtube sometimes reports 159x90 instead of 160x90
+                            sb.width = math.ceil(sb.width / 2) * 2
+                            sb.height = math.ceil(sb.height / 2) * 2
                         end
                     else
                         -- estimate the count of thumbnails
